@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-
 public class Utility {
 
 	private static String path = "com.mysql.cj.jdbc.Driver";
@@ -14,8 +13,10 @@ public class Utility {
 	private static String pass = "root";
 	private static Connection con = null;
 	private static PreparedStatement ps;
-	
-	private Utility() {}
+
+	private Utility() {
+	}
+
 	public static PreparedStatement createConnection(String query) {
 		try {
 			Class.forName(path);
@@ -24,20 +25,21 @@ public class Utility {
 //			System.out.println(2);
 			ps = con.prepareStatement(query);
 //			System.out.println(3);
-		}catch(ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			System.out.println(e);
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			System.out.println(e);
 		}
 		return ps;
 	}
+
 	public static void closeConnection() {
 		try {
-			if(con != null && ps != null) {
+			if (con != null && ps != null) {
 				con.close();
 				ps.close();
 			}
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			System.out.println(e);
 		}
 	}
